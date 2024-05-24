@@ -44,6 +44,7 @@ class ProfileScreen extends StatelessWidget {
                               color: whiteColor,
                             ),
                           ).onTap(() {
+                            print(snapshot.data!.docs[0]);
                             // Get.put(ProfileControllers());
                             controller.nameController.text = data2['name'];
                             controller.passController.text = data2['password'];

@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:emart_project/consts/consts.dart';
 import 'package:emart_project/controllers/profile_controllers.dart';
+import 'package:emart_project/view/profile_screen/profile_screen.dart';
 import 'package:emart_project/widget_common/bg_widget.dart';
 import 'package:emart_project/widget_common/custom_text_field.dart';
 import 'package:emart_project/widget_common/our_button.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final dynamic data;
@@ -13,7 +15,15 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     Get.put(ProfileControllers());
+
+    Future<void> sharePreferene(value) async {
+      final SharedPreferences prefs = await _prefs;
+      prefs.getString("path");
+
+      prefs.setString("path", value);
+    }
 
     var controller = Get.find<ProfileControllers>();
     return bgWidget(
@@ -29,7 +39,7 @@ class EditProfileScreen extends StatelessWidget {
                     width: 100,
                     fit: BoxFit.cover,
                   ).box.roundedFull.clip(Clip.antiAlias).make()
-                : data['imageUrl'] == '' && controller.profileImagePath.isEmpty
+                : data['imageUrl'] != '' && controller.profileImagePath.isEmpty
                     ? Image.network(data['imageUrl'],
                             width: 100, fit: BoxFit.cover)
                         .box
@@ -47,6 +57,7 @@ class EditProfileScreen extends StatelessWidget {
                 onPress: () {
                   // Get.find<ProfileControllers>().changeImage(context);
                   controller.changeImage(context);
+                  print(controller.changeImage(context));
                 },
                 textColor: whiteColor,
                 title: "Change"),

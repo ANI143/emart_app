@@ -2,7 +2,6 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:emart_project/consts/consts.dart';
 import 'package:emart_project/messenging/firebase_api.dart';
 import 'package:emart_project/view/splash_screen/splash_screen.dart';
-import 'package:emart_project/widget_common/with_apicalling/data_list.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
